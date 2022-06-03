@@ -3,7 +3,7 @@ import java.awt.Color;
 public class Sand extends Substance {
 
     protected Sand() {
-        super("sand", 1.5f, new Color(150, 120, 90), 0f);
+        super("sand", 1.5f, new Color(110, 70, 40), 0f);
     }
 
     @Override

@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class DirtyWater extends Substance {
     protected DirtyWater() {
-        super("dirty water", 1.2f, new Color(10, 40, 110), 0.001f);
+        super("dirty water", 1.2f, new Color(10, 40, 110, 200), 0.001f);
     }
 
     @Override

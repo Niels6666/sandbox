@@ -4,7 +4,7 @@ import java.util.Random;
 public class Smoke extends Gaz {
 
     protected Smoke() {
-        super("smoke", 0.05f, new Color(50, 45, 45));
+        super("smoke", 0.05f, new Color(50, 45, 45, 100));
     }
 
     @Override

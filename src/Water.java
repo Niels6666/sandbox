@@ -5,7 +5,7 @@ import java.util.Random;
 public class Water extends Substance {
 
     protected Water() {
-        super("water", 0.9f, new Color(0, 10, 150), 0.002f);
+        super("water", 0.9f, new Color(0, 10, 150, 100), 0.002f);
     }
 
     @Override

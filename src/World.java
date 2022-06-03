@@ -194,7 +194,7 @@ public class World {
             r.setFrameFromCenter(mx, my, mx + cw * 2, my + ch * 2);
             g2d.draw(r);
         }
-        g2d.setColor(Color.gray);
+        g2d.setColor(Color.lightGray);
         g2d.draw(new Rectangle2D.Double(0, 0, cw * ncellsX, ch * ncellsY));
 
         g2d.setFont(new Font("Consolas", Font.PLAIN, 20));

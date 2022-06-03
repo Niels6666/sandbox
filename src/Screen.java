@@ -2,15 +2,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.geom.Point2D;
-import java.util.Random;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,11 +25,19 @@ public class Screen extends JFrame {
     boolean updating = true;
     int index = 0;
 
+    BufferedImage img;
+
     public Screen() {
         setTitle("sand simulation");
         setMinimumSize(new Dimension(800, 600));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        try {
+            img = ImageIO.read(new File("bg.png"));
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
 
         w = new World(0, 0, 3, 3);
 
@@ -34,10 +45,18 @@ public class Screen extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.setColor(new Color(60, 90, 30));
-                g.fillRect(0, 0, getWidth(), getHeight());
+                Graphics2D g2d = (Graphics2D) g;
 
                 
+                float pw = getWidth();
+                float ph = getHeight();
+                
+                g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                g2d.drawImage(img, 0, 0, getWidth(), getHeight(), 0, 0, getWidth(), getHeight(), null);
+                g.setColor(new Color(60, 90, 60, 150));
+                g.fillRect(0, 0, getWidth(), getHeight());
+
                 Point2D mp = getMousePosition();
                 if (mp != null) {
                     if (mousePressed) {
@@ -45,8 +64,6 @@ public class Screen extends JFrame {
                     }
                 }
 
-                float pw = getWidth();
-                float ph = getHeight();
                 if (updating) {
                     long start = System.currentTimeMillis();
                     int ncellsX = (int) Math.floor(pw / w.cw) - 1;
@@ -55,7 +72,7 @@ public class Screen extends JFrame {
                     App.update = System.currentTimeMillis() - start;
                 }
                 long start = System.currentTimeMillis();
-                w.draw((Graphics2D) g, mp, (int) (pw), (int) (ph));
+                w.draw(g2d, mp, (int) (pw), (int) (ph));
                 App.draw = System.currentTimeMillis() - start;
                 App.frames++;
             }
@@ -205,4 +222,5 @@ public class Screen extends JFrame {
         panel.setBorder(null);
         setContentPane(panel);
     }
+
 }
