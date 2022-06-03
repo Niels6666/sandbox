@@ -19,6 +19,8 @@ public class App {
         t.setRepeats(true);
         t.start();
 
+        System.out.println("plop");
+
         while (true) {
             try {
                 Thread.sleep(2);
