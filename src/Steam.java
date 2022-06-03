@@ -7,8 +7,8 @@ public class Steam extends Gaz {
     }
 
     @Override
-    public void update(Cell c, World w) {
-
+    public void update(Cell c) {
+        World w = c.w;
         Cell above = w.above(c);
         Cell above_left = w.left(above);
         Cell above_right = w.right(above);

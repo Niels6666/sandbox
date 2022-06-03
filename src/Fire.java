@@ -9,13 +9,14 @@ public class Fire extends Substance {
     }
 
     @Override
-    public void update(Cell c, World w) {
+    public void update(Cell c) {
         Random r = new Random();
         int test = r.nextInt(100);
         if (test > 99) {
-            c.material = World.Material.SMOKE;
+            c.set(World.Material.SMOKE);
         }
 
+        World w = c.w;
         Cell above = w.above(c);
         Cell below = w.below(c);
         Cell cell_left = w.left(c);
@@ -32,10 +33,10 @@ public class Fire extends Substance {
 
         for (Cell cell : tests) {
             if (cell != null) {
-                if (cell.material.substance.igniteCoeff > 0) {
-                    if (ignite(cell.material.substance.igniteCoeff)) {
-                        c.material = World.Material.SMOKE;
-                        cell.material = cell.material.substance.combustion();
+                if (cell.get().substance.igniteCoeff > 0) {
+                    if (ignite(cell.get().substance.igniteCoeff)) {
+                        c.set(World.Material.SMOKE);
+                        cell.set(cell.get().substance.combustion());
                         return;
                     }
                 }

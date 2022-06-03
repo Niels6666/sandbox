@@ -8,13 +8,13 @@ public class Smoke extends Gaz {
     }
 
     @Override
-    public void update(Cell c, World w) {
+    public void update(Cell c) {
         Random r = new Random();
         int test = r.nextInt(2000);
         if (test > 1990) {
-            c.material = World.Material.AIR;
+            c.set(World.Material.AIR);
         }
-
+        World w = c.w;
         Cell above = w.above(c);
         Cell above_left = w.left(above);
         Cell above_right = w.right(above);

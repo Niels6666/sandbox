@@ -7,50 +7,53 @@ public class DirtyWater extends Substance {
     }
 
     @Override
-    public void update(Cell c, World w) {
-        Cell above = w.above(c);
+    public void update(Cell c) {
+        World w = c.w;
         Cell below = w.below(c);
         Cell below_left = w.left(below);
         Cell below_right = w.right(below);
-        Cell cell_left = w.left(c);
-        Cell left_left = w.left(cell_left);
-        Cell cell_right = w.right(c);
-        Cell right_right = w.left(cell_right);
 
-        if (chanceToRise(c, above)) {
-            swapSubstances(above, c);
+        Cell below_left2 = w.below(w.left(below_left));
+        Cell below_right2 = w.below(w.right(below_right));
+
+        Cell cell_left = w.left(c);
+        Cell cell_right = w.right(c);
+
+        if (canMove(c, below)) {
+            swapSubstances(c, below);
             return;
         }
 
-        if (isEmpty(below_left)) {
+        if (canMove(c, below_left)) {
             swapSubstances(below_left, c);
             return;
         }
 
-        if (isEmpty(below_right)) {
+        if (canMove(c, below_right)) {
             swapSubstances(below_right, c);
-        }
-
-        if (isEmpty(cell_left)) {
-            swapSubstances(cell_left, c);
             return;
         }
 
-        if (isEmpty(cell_right)) {
-            swapSubstances(cell_right, c);
+        if (canMove(c, below_left2)) {
+            swapSubstances(below_left2, c);
+            return;
         }
-        
-        if (chanceToGoLeftOrRigth()) {
-            
-            if (isEmpty(right_right)) {
-                swapSubstances(right_right, c);
-            }
-            
-            if (isEmpty(left_left)) {
-                swapSubstances(left_left, c);
+
+        if (canMove(c, below_right2)) {
+            swapSubstances(below_right2, c);
+            return;
+        }
+
+        if (chanceToGoLeft()) {
+            if (canMove(c, cell_left)) {
+                swapSubstances(cell_left, c);
                 return;
             }
-            
+        }
+
+        if (canMove(c, cell_right)) {
+            swapSubstances(cell_right, c);
+            return;
         }
     }
     

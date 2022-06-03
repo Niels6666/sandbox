@@ -15,16 +15,16 @@ public class World {
     public enum Material {
         AIR(new Air()),
         SAND(new Sand()),
-        WATER(new Water());
-        // FIRE(new Fire()),
-        // SMOKE(new Smoke()),
-        // STEAM(new Steam()),
-        // WOOD(new Wood()),
-        // WALL(new Wall()),
-        // BURNINGWOOD(new BurningWood()),
-        // ASH(new Ash()),
-        // DIRTYWATER(new DirtyWater()),
-        // CHARCOAL(new Charcoal());
+        WATER(new Water()),
+        FIRE(new Fire()),
+        SMOKE(new Smoke()),
+        STEAM(new Steam()),
+        WOOD(new Wood()),
+        WALL(new Wall()),
+        BURNINGWOOD(new BurningWood()),
+        ASH(new Ash()),
+        DIRTYWATER(new DirtyWater()),
+        CHARCOAL(new Charcoal());
 
         public Consumer<Cell> consumer;
         public Substance substance;
@@ -194,13 +194,13 @@ public class World {
             r.setFrameFromCenter(mx, my, mx + cw * 2, my + ch * 2);
             g2d.draw(r);
         }
-        g2d.setColor(Color.white);
+        g2d.setColor(Color.gray);
         g2d.draw(new Rectangle2D.Double(0, 0, cw * ncellsX, ch * ncellsY));
 
         g2d.setFont(new Font("Consolas", Font.PLAIN, 20));
 
         Rectangle2D subR = g2d.getFont().getStringBounds(sub, g2d.getFontRenderContext());
-        String info = (mode.equals(Mode.ADD) ? "adding " : "removing ") + material.name().toLowerCase();
+        String info = (mode.equals(Mode.ADD) ? "adding " : "removing ") + material.substance.name;
         Rectangle2D infoR = g2d.getFont().getStringBounds(info, g2d.getFontRenderContext());
 
         g2d.drawString(info, (float) (width - infoR.getWidth() - cw * 2f),

@@ -12,7 +12,16 @@ public class App {
         fen.setVisible(true);
 
         Timer t = new Timer(1000, (ae) -> {
-            String title = String.format("sand simulation| FPS: %03d, update: %d ms, draw: %d ms, rectangles drawn: %d", frames, update, draw, drawnR);
+            StringBuilder sb = new StringBuilder("sand simulation|");
+            String fpsS = String.format("fps: %03d", frames);
+            String updateS = "update: paused";
+            if (update > 0) {
+                updateS = String.format(", update: %d ms", update);
+            }
+            String drawS = String.format(", draw: %d ms", draw);
+            String drawnRS = String.format(", rectangles drawn: %d", drawnR);
+
+            String title = sb.append(fpsS).append(updateS).append(drawS).append(drawnRS).toString();
             fen.setTitle(title);
             frames = 0;
         });

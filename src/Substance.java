@@ -47,7 +47,7 @@ public abstract class Substance {
     }
 
     protected boolean chanceToGoLeft() {
-        return gen.nextInt(10) >1;
+        return gen.nextInt(100) > 5;
     }
 
     protected boolean chanceToGoLeftOrRigth() {

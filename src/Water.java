@@ -30,15 +30,15 @@ public class Water extends Substance {
         tests.add(below_left);
         tests.add(below_right);
 
-        // for (Cell cell : tests) {
-        // if (cell != null) {
-        // if (cell.material.equals(World.Material.ASH)) {
-        // cell.material = World.Material.DIRTYWATER;
-        // c.material = World.Material.AIR;
-        // return;
-        // }
-        // }
-        // }
+        for (Cell cell : tests) {
+            if (cell != null) {
+                if (cell.get().equals(World.Material.ASH)) {
+                    cell.set(World.Material.DIRTYWATER);
+                    c.set(World.Material.AIR);
+                    return;
+                }
+            }
+        }
 
         if (canMove(c, below)) {
             swapSubstances(c, below);

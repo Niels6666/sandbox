@@ -7,24 +7,25 @@ public class Ash extends Substance {
     }
 
     @Override
-    public void update(Cell c, Grid g) {
-        Cell above = c.above();
-        Cell below = c.below();
-        Cell below_left = below.left();
-        Cell below_right = below.right();
+    public void update(Cell c) {
+        World w = c.w;
+        Cell below = w.below(c);
+        Cell below_left = w.left(below);
+        Cell below_right = w.right(below);
 
-        if (chanceToRise(c, above)) {
-            swapSubstances(c, above, g);
+        if (canMove(c, below)) {
+            swapSubstances(below, c);
             return;
         }
 
-        if (isEmpty(below_left)) {
-            swapSubstances(below_left, c, g);
+        if (canMove(c, below_left)) {
+            swapSubstances(below_left, c);
             return;
         }
 
-        if (isEmpty(below_right)) {
-            swapSubstances(below_right, c, g);
+        if (canMove(c, below_right)) {
+            swapSubstances(below_right, c);
+            return;
         }
     }
 

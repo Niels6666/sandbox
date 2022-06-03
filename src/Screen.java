@@ -34,7 +34,7 @@ public class Screen extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.setColor(Color.black);
+                g.setColor(new Color(60, 90, 30));
                 g.fillRect(0, 0, getWidth(), getHeight());
 
                 

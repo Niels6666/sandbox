@@ -7,25 +7,26 @@ public class Charcoal extends Substance {
     }
 
     @Override
-    public void update(Cell c, World w) {
-        // Cell above = w.above(c);
-        // Cell below = w.below(c);
-        // Cell below_left = w.left(below);
-        // Cell below_right = w.right(below);
+    public void update(Cell c) {
+        World w = c.w;
+        Cell below = w.below(c);
+        Cell below_left = w.left(below);
+        Cell below_right = w.right(below);
 
-        // if (chanceToRise(c, above)) {
-        //     swapSubstances(c, above);
-        //     return;
-        // }
-        
-        // if (isEmpty(below_left)) {
-        //     swapSubstances(below_left, c);
-        //     return;
-        // }
+        if (canMove(c, below)) {
+            swapSubstances(below, c);
+            return;
+        }
 
-        // if (isEmpty(below_right)) {
-        //     swapSubstances(below_right, c);
-        // }
+        if (canMove(c, below_left)) {
+            swapSubstances(below_left, c);
+            return;
+        }
+
+        if (canMove(c, below_right)) {
+            swapSubstances(below_right, c);
+            return;
+        }
     }
 
     @Override

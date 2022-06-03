@@ -8,11 +8,12 @@ public class BurningWood extends Substance {
     }
 
     @Override
-    public void update(Cell c, World w) {
+    public void update(Cell c) {
+        World w = c.w;
         Random r = new Random();
         int test = r.nextInt(10000);
         if (test > 9990) {
-            c.material = World.Material.SMOKE;
+            c.set(World.Material.SMOKE);
         }
         Cell above = w.above(c);
         Cell below = w.below(c);
@@ -31,18 +32,18 @@ public class BurningWood extends Substance {
 
         for (Cell cell : tests) {
             if (cell != null) {
-                if (cell.material.substance.igniteCoeff > 0) {
-                    if (ignite(cell.material.substance.igniteCoeff)) {
+                if (cell.get().substance.igniteCoeff > 0) {
+                    if (ignite(cell.get().substance.igniteCoeff)) {
                         if (r.nextInt(100) > 70) {
-                            cell.material = World.Material.FIRE;
+                            cell.set(World.Material.FIRE);
                         } else {
-                            cell.material = cell.material.substance.combustion();
+                            cell.set(cell.get().substance.combustion());
                         }
                         return;
-                    }else{
-                        if(cell.material.equals(World.Material.WATER)){
-                            cell.material = World.Material.STEAM;
-                            c.material = World.Material.CHARCOAL;
+                    } else {
+                        if (cell.get().equals(World.Material.WATER) || cell.get().equals(World.Material.DIRTYWATER)) {
+                            cell.set(World.Material.STEAM);
+                            c.set(World.Material.CHARCOAL);
                         }
                     }
                 }

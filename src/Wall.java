@@ -7,7 +7,7 @@ public class Wall extends Substance {
     }
 
     @Override
-    public void update(Cell c, World w) {
+    public void update(Cell c) {
         return;
     }
 

@@ -7,7 +7,7 @@ public class Wood extends Substance {
     }
 
     @Override
-    public void update(Cell c, World w) {
+    public void update(Cell c) {
         return;
     }
 
