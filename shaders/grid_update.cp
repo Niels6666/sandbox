@@ -53,7 +53,7 @@ void main(void){
     
     if(updateRound == 0){
         //update the velocity
-        if(isFree(coords + DOWN))
+        if(isFree(coords + DOWN));
     }
 
     //accelerate
